@@ -44,7 +44,7 @@ function hienThiNv() {
   if (valid) {
     arrNhanVien.push(nhanVien);
     renderNhanVien();
-    // document.getElementById("formNhanVien").reset();
+    document.getElementById("formNhanVien").reset();
 
   }
 }
