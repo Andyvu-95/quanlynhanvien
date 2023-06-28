@@ -1,7 +1,4 @@
 // b1 lấy dữ liệu và hiển thị
-// const getEle = (ele) => {
-//   return document.getElementById(ele);
-// };
 arrNhanVien = [];
 var arrInput = [
   "qlTaiKhoan",
@@ -25,6 +22,7 @@ var arrtb = [
   "tbGiolam",
 ];
 
+
 function hienThiNv() {
   //tạo ra một lớp đối tượng mẫu
   var nhanVien = new MauNhanVien();
@@ -36,15 +34,17 @@ function hienThiNv() {
   }
 
   valid &= 
+  checkTaiKhoan("qlTaiKhoan", "tbTKNV") &&
   checkDinhDangEmail("qlEmail", "tbEmail")&&
   checkDinhDangPass ("qlPass", "tbMatKhau")&&
+  checkNgayLam ("qlNgayLam", "tbNgay") &&
   checkLuong ("qlLuongCB", "tbLuongCB") &&
   checkGioLam("qlGioLam", "tbGiolam");
 
   if (valid) {
     arrNhanVien.push(nhanVien);
     renderNhanVien();
-    document.getElementById("formNhanVien").reset();
+    // document.getElementById("formNhanVien").reset();
 
   }
 }
@@ -89,6 +89,7 @@ function xoaNhanVien(maNv) {
   renderNhanVien();
 }
 
+
 // sửa nhân viên
 function layThongTin(idNhanVien) {
   var nhanVien = {};
@@ -105,6 +106,8 @@ function layThongTin(idNhanVien) {
     document.getElementById(arrInput[z]).value = nhanVien[arrInput[z]];
   }
   document.getElementById("btnThem").click();
+  // vô hiệu hoá nut button thêm nhân viên 
+  document.getElementById('btnThemNV').disabled = true;
 }
 
 function capNhapNhanVien() {
@@ -126,20 +129,23 @@ function capNhapNhanVien() {
     nhanVien[arrInput[i]] = giaTri;
   }
 
+  // check điều kiện khi sửa
+
   valid &= 
   checkDinhDangEmail("qlEmail", "tbEmail")&&
   checkDinhDangPass ("qlPass", "tbMatKhau")&&
+  checkNgayLam ("qlNgayLam", "tbNgay") &&
   checkLuong ("qlLuongCB", "tbLuongCB") &&
   checkGioLam("qlGioLam", "tbGiolam");
   if (valid) {
-    arrNhanVien[Index] = nhanVien;
+  arrNhanVien[Index] = nhanVien;
   renderNhanVien();
+  document.getElementById("formNhanVien").reset();
   }
   
 }
 document.getElementById("btnCapNhat").onclick = capNhapNhanVien;
 
-console.log(capNhapNhanVien)
 
 //  SỰ KIỆN XEM MẬT KHẨU
 document.getElementById('xemTK').onclick = function(){
@@ -157,3 +163,4 @@ document.getElementById("btnTimNV").onclick = function(){
   var newTuKhoa = tuKhoa.toLowerCase();
   console.log(newTuKhoa)
 }
+console.log (arrInput)
